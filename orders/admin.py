@@ -14,6 +14,8 @@ class ProductInOrderInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     list_display = [field.name for field in Order._meta.fields]
+    # list_display = ('id', 'customer_name', 'customer_email', 'customer_phone', 'address', 'total_price',
+    #                 'comments', 'status', 'created', 'updated')
     list_display_links = ('id', 'customer_name')
     list_filter = ('id', 'customer_email', 'customer_phone')
     search_fields = ('id', 'customer_email', 'customer_phone')
