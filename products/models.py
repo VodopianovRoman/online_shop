@@ -6,7 +6,8 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    description = models.TextField(max_length=128, blank=True, null=True, default=None)
+    description_short = models.TextField(max_length=75, blank=True, null=True, default=None)
+    description = models.TextField(max_length=1024, blank=True, null=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -19,6 +20,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, blank=True, null=True, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products_images')
+    is_main = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)

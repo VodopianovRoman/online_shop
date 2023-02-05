@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import re_path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'landing', include('landing.urls')),
-    path(r'products', include('products.urls')),
-    path(r'orders', include('orders.urls')),
-]
+    re_path(r'^', include('landing.urls')),
+    # path('', include('landing.urls')),
+    path('products', include('products.urls')),
+    path('orders', include('orders.urls')),
+]\
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

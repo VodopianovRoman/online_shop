@@ -1,9 +1,17 @@
 from django.shortcuts import render
 
 from .forms import *
+from products.models import *
 
 # Create your views here.
 LANDING_HTML = "landing/landing.html"
+HOME_HTML = "landing/home.html"
+
+
+def home(request):
+    products_images = ProductImage.objects.filter(is_active=True, is_main=True)
+
+    return render(request, HOME_HTML, locals())
 
 
 def landing(request):

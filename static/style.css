@@ -2,43 +2,44 @@ html, body {
     height: 100%;
     max-height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-color: black;
 }
 
-.top-container {
-    padding-top: 10%;
+.section-top {
+    margin: 20px;
 }
 
-.general-container {
-    background: url('img/bg_image.jpg');
-    height: 100%;
-}
-
-.general-container form {
-    margin-top: 30px;
-}
-
-.general-container form label {
-    font-weight: 100;
+.product-item {;
+    height: 450px;
+    background-color: black;
+    position: relative;
+    padding: 20px;
     color: white;
 }
 
-.btn-orange {
-    background-color: #e8643e;
-    border: none;
+.product-item:hover {
+    border: 1px solid yellow;
+    border-radius: 10px;
 }
 
-.btn-orange:hover {
-    background-color: #dc5129;
-    border: none;
+.add-to-cart-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
-.title {
-    text-align: center;
+.product-price {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.btn {
+    background-color: black;
+    border: 1px solid yellow;
+}
+
+.btn:hover {
+    background-color: #353535;
     color: white;
-    font-weight: 100;
-    line-height: 50px;
 }
-
-
-
-

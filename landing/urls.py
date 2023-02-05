@@ -1,6 +1,9 @@
 from django.urls import path, include
+from django.urls import re_path
 from . import views
 
 urlpatterns = [
-    path('', views.landing, name='landing'),
+    re_path(r'^$', views.home, name='home'),
+    # path('', views.home, name='home'),
+    path('landing', views.landing, name='landing'),
 ]
