@@ -1,0 +1,24 @@
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="user_name">Ваше ім'я:</label>
+        <input type="text" class="form-control" id="user_name" aria-describedby="emailHelp" placeholder="Введіть Ваше ім'я" name="{{ form.user_name.name }}">
+    </div>
+    <div class="form-group">
+        <label for="users_review">Залиште Ваш відгук:</label>
+        <textarea class="form-control" id="users_review" placeholder="Ваш коментар" name="{{ form.review.name }}"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Відправити</button>
+</form>
+                          
+{% for review in reviews_for_user %}
+    <div class="container comment-container">
+        <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+            <li>
+                <p class="fs-110 font-cond-l" contenteditable="false">" {{ review.review }} "</p>
+                <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">{{ review.user_name }}</h5>
+                <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">{{ review.created }}</small>
+            </li>
+        </ul>
+    </div>
+{% endfor %}

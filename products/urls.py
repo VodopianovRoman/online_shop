@@ -1,6 +1,6 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.products, name='landing'),
+    re_path(r'^product/(?P<product_id>\w+)/$', views.products, name='product'),
 ]

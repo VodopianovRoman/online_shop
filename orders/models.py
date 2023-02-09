@@ -39,6 +39,8 @@ class Order(models.Model):
         super(Order, self).save(*args, **kwargs)
 
 
+
+
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, blank=True, null=True, default=None, on_delete=models.CASCADE)

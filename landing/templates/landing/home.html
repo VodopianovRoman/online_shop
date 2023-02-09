@@ -7,27 +7,55 @@
         <img src="{% static 'img/slider0.jpg' %}" class="img-responsive" alt="Pizza">
     </div>
 
-    <div class="section">
+    <div class="section section1">
         <div class="container">
             <div class="row">
-                {%  for product_image in products_images %}
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div>
-                                <img src="{{ product_image.image.url }}" class="img-responsive" alt="pizza">
-                            </div>
-                            <h3>{{ product_image.product.name }}</h3>
-                            <p>{{ product_image.product.description|truncatechars_html:75 }}</p>
-                            <div class="product-price">
-                                <h4>{{ product_image.product.price }} ₴</h4>
-                            </div>
-                            <div class="add-to-cart-button">
-                                <button class="btn">
-                                    В кошик
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Частіше обирають
+                    </h1>
+                </div>
+
+                {%  for product_image in products_images_popular %}
+                    {% include 'landing/product-item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-delivery">
+        <h3>БЕЗКОШТОВНА доставка від 249 грн </h3>
+    </div>
+
+    <div class="section section2 sets-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Сети
+                    </h1>
+                </div>
+
+                {%  for product_image in products_images_sets %}
+                    {% include 'landing/product-item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section section3 pizza-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Піцца
+                    </h1>
+                </div>
+
+                {%  for product_image in products_images_pizza %}
+                    {% include 'landing/product-item.html' %}
                 {% endfor %}
 
             </div>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{% static 'static_dev/css/landing.css' %}">
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                {% for image_item in product.productimage_set.all %}
+                    <img src="{{ image_item.image.url }}" class="img-responsive" alt="img" >
+                {% endfor %}
+            </div>
+            <div class="col-lg-6">
+                <h1 class="text-center">
+                    {{ product.name }}
+                </h1>
+                <div class="">
+{#                    {{ product.description }}#}
+                </div>
+                <div class="">
+                    <div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active">
+                              <a href="#compound" aria-controls="compound" role="tab" data-toggle="tab">Склад</a>
+                          </li>
+                          <li role="presentation">
+                              <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Відгуки</a>
+                          </li>
+                          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content product-tab">
+                          <div role="tabpanel" class="tab-pane active" id="compound">{{ product.description }}</div>
+                          <div role="tabpanel" class="tab-pane" id="reviews">
+
+                              {% include 'products/revirew.html' %}
+
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                          <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

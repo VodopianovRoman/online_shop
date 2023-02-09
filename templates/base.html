@@ -12,23 +12,26 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400" rel="stylesheet">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 
 </head>
 <body>
 
     <div class="wrapper">
+        <div class="wrapper-content">
 {#        navbar#}
-        {% include 'navbar.html'%}
+            {% include 'navbar.html'%}
 
-        {% block content %}
+            {% block content %}
 
-        {% endblock content %}
+            {% endblock content %}
 
-        {%  include 'footer.html'%}
-{#        footer#}
+        </div>
     </div>
+
+    {#            footer#}
+    {%  include 'footer.html'%}
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

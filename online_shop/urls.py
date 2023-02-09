@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include('landing.urls')),
     # path('', include('landing.urls')),
-    path('products', include('products.urls')),
+    path('', include('products.urls')),
     path('orders', include('orders.urls')),
 ]\
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
