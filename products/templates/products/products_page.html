@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="section section2 sets-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        {% if products_images_pizza %}
+                            Піцца
+                        {% elif products_images_sets %}
+                            Сети
+                        {% endif %}
+                    </h1>
+                </div>
+                {%  for product_image in products_images_sets %}
+                    {% include 'landing/product-item.html' %}
+                {% endfor %}
+                {%  for product_image in products_images_pizza %}
+                    {% include 'landing/product-item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

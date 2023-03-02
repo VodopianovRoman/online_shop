@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container" style=" margin-top: 10px;">
+        <a class="a-checkout" href="{% url 'checkout' %}" style="color: #efbf00; text-decoration: none;">Назад</a>
+    </div>
+
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3 class="text-left">Оформлення замовлення</h3>
+
+                    {{ request.session.basket.product }}
+
+                    <label> Ваше ім'я
+                        <input type="text" >
+                    </label>
+                    <label>Ваш номер телефону
+                        <input type="number">
+                    </label>
+                    <label>Ваша електрона адреса
+                        <input type="email">
+                    </label>
+                    <label>Адреса доставки
+                        <input type="text">
+                    </label>
+                    <label>Комментар до заказу
+                        <textarea></textarea>
+                    </label>
+
+                </div>
+
+            <div class="col-lg-4 delivery-2">
+{#                <h3>Моє замовлення</h3>#}
+                <div class="checkout-header">
+                    <h3>Моє замовлення</h3>
+                </div>
+                <ul class="checkout list-products">
+                     {% for  product_in_basket in  products_in_basket %}
+{#                        <li>#}
+{#                            <div class=" image show-b-desk">#}
+{#                               {% for product_image in product_in_basket.product.productimage_set.all %}#}
+{#                                   <a href="{% url 'product' product_image.product.id %}">#}
+{#                                       <img src="{{ product_image.image.url }}" class="img-responsive img-desk" alt="pizza">#}
+{#                                   </a>#}
+{#                               {% endfor %}#}
+{#                            </div>#}
+{#                            <div class=" info">#}
+{#                                <div class="product-info">#}
+{#                                    <div class="name">{{ product_in_basket.product.name }}</div>#}
+{#                                    <div class="product_quantity">{{ product_in_basket.count }}</div>#}
+{#                                </div>#}
+{#                                <div class="product-price">#}
+{#                                    {{ product_in_basket.price_per_item }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+                         <li class="li-checkout">
+                            <div class=" image show-b-desk">
+                               {% for product_image in product_in_basket.product.productimage_set.all %}
+                                   <a href="{% url 'product' product_image.product.id %}">
+                                       <img src="{{ product_image.image.url }}" class="img-responsive img-desk" alt="pizza">
+                                   </a>
+                               {% endfor %}
+                            </div>
+                            <div class=" info">
+                                <div class="product-info">
+                                    <div class="name">{{ product_in_basket.product.name }}</div>
+                                    <div class="product_quantity">{{ product_in_basket.count }} шт.</div>
+                                </div>
+                                <div class="product-price-checkout">
+                                    {{ product_in_basket.price_per_item }} ₴</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="total-order-price">
+                    <h4>Загальна сума замовлення: {{ total_price_of_basket }} ₴</h4>
+                </div>
+
+{#                <h4 id="total_order_amount"> ₴</h4>#}
+                <div class="order-btn">
+{#                    <button type="submit" class="btn-delivery btn-lg">Доставка</button>#}
+                    <button type="submit" class="btn-delivery btn-lg btn-ordering" formaction="{% url 'checkout_delivery' %}">Замовити</button>
+                </div>
+            </div>
+
+{#            </div>#}
+        </div>
+    </form>
+
+
+{% endblock %}

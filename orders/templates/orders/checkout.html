@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{#    <form class="form-horizontal" method="post">#}
+{#        {% csrf_token %}#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-9">#}
+{#                <h3 class="text-left">Ваш кошик</h3>#}
+{##}
+{#                {{ request.session.basket.product }}#}
+{##}
+{#                <form>#}
+{#                    {{ form.errors }}#}
+{##}
+{#                    <div class="form-group">#}
+{#                        <label> Ім'я#}
+{#                            <span style="color: darkred">{{ form.name.errors }}</span>#}
+{#                            <input type="text" name="{{ form.name.html_name }}"  class="form-control"#}
+{#                                   value= "{{ request.POST.name }}" style="font-weight: normal">#}
+{#                        </label>#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                        <label> Номер телефону#}
+{#                            <span style="color: darkred">{{ form.phone.errors }}</span>#}
+{#                            <input type="text" name="{{ form.phone.html_name }}" class="form-control"#}
+{#                                   value= "{{ request.POST.phone }}" style="font-weight: normal">#}
+{#                        </label>#}
+{#                    </div>#}
+{#                    <table class="table">#}
+{#                        <thead>#}
+{#                        <tr>#}
+{#                            <th>img</th>#}
+{#                            <th>product_name</th>#}
+{#                            <th>quantity</th>#}
+{#                            <th>price_per_item</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                            {% for  product_in_basket in  products_in_basket %}#}
+{#                                <tr>#}
+{#                                    <td>#}
+{#                                        {% for product_image in product_in_basket.product.productimage_set.all %}#}
+{#                                            <a href="{% url 'product' product_image.product.id %}">#}
+{#                                                <img src="{{ product_image.image.url }}" class="img-responsive img-checkout" alt="pizza">#}
+{#                                            </a>#}
+{#                                        {% endfor %}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <h4>{{ product_in_basket.product.name }}</h4>#}
+{#                                        <p>{{ product_in_basket.product.weight_item }}</p>#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <div class="number">#}
+{#                                        <button class="number-minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">–</button>#}
+{#                                        <input type="number" min="0" class="product-in-basket-quantity" value="{{ product_in_basket.count }}" readonly  onchange="console.log('change')">#}
+{#                                        <button class="number-plus" type="button" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.onchange();">+</button>#}
+{#                                        </div>#}
+{#                                        <label>#}
+{#                                            <input type="number" min="0" class="product-in-basket-quantity" value="{{ product_in_basket.count }}"#}
+{#                                                   style="color: black; font-weight: normal;" name="product_in_basket_{{ product_in_basket.id }}">#}
+{#                                        </label>#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <h4 style="margin-top: 20px;" class="price-per-item">{{ product_in_basket.price_per_item }}</h4>#}
+{#                                        <span class="total-product-in-basket-amount hidden">{{ product_in_basket.total_price }}</span>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                            {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </form>#}
+{#        </div>#}
+{##}
+{#            <div class="col-lg-3 delivery">#}
+{#                <h3>Сума замовлення</h3>#}
+{#                <h4>{{ total_price_of_basket }} ₴</h4>#}
+{#                <h4 id="total_order_amount"> ₴</h4>#}
+{#                <div >#}
+{#                    <button type="submit" class="btn-delivery btn-lg" >Доставка</button>#}
+{#                    <button type="submit" class="btn-delivery btn-lg" formaction="{% url 'checkout_delivery' %}">Доставка</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    </form>#}
+
+
+    {% if created %}
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-center">
+                    ДЯКУЄМО ЗА ЗАМОВЛЕННЯ! НОМЕР ВАШЕГО ЗАМОВЛЕННЯ: {{ order.id }}
+                </h2>
+                <h4 class="text-center">НАШ ОПЕРАТОР НЕЗАБАРОМ ЗВ'ЯЖЕТЬЯ З ВАМИ</h4>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <form class="form-horizontal" method="post">
+        {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3 class="text-left">Ваш кошик</h3>
+
+                {{ request.session.basket.product }}
+
+{#                <form>#}
+{#                    {{ form.errors }}#}
+
+                    <div class="form-group">
+                        <label> Ім'я
+                            <span style="color: darkred">{{ form.name.errors }}</span>
+                            <input type="text" name="{{ form.name.html_name }}"  class="form-control"
+                                   value= "{{ request.POST.name }}" style="font-weight: normal">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label> Номер телефону
+                            <span style="color: darkred">{{ form.phone.errors }}</span>
+                            <input type="text" name="{{ form.phone.html_name }}" class="form-control"
+                                   value= "{{ request.POST.phone }}" style="font-weight: normal">
+                        </label>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+{#                            <th>img</th>#}
+{#                            <th>product_name</th>#}
+{#                            <th>quantity</th>#}
+{#                            <th>price_per_item</th>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for  product_in_basket in  products_in_basket %}
+                                <tr>
+                                    <td>
+                                        {% for product_image in product_in_basket.product.productimage_set.all %}
+                                            <a href="{% url 'product' product_image.product.id %}">
+                                                <img src="{{ product_image.image.url }}" class="img-responsive img-checkout" alt="pizza">
+                                            </a>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <h4>{{ product_in_basket.product.name }}</h4>
+                                        <p>{{ product_in_basket.product.weight_item }}</p>
+                                    </td>
+                                    <td>
+{#                                        <div class="number">#}
+{#                                        <button class="number-minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">–</button>#}
+{#                                        <input type="number" min="0" class="product-in-basket-quantity" value="{{ product_in_basket.count }}" readonly  onchange="console.log('change')">#}
+{#                                        <button class="number-plus" type="button" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.onchange();">+</button>#}
+{#                                        </div>#}
+                                        <label>
+                                            <input type="number" min="0" class="product-in-basket-quantity" value="{{ product_in_basket.count }}"
+                                                   style="color: black; font-weight: normal;" name="product_in_basket_{{ product_in_basket.id }}">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <h4 style="margin-top: 20px;" class="price-per-item">{{ product_in_basket.price_per_item }}</h4>
+                                        <span class="total-product-in-basket-amount hidden">{{ product_in_basket.total_price }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+{#                </form>#}
+        </div>
+
+            <div class="col-lg-3 delivery">
+                <h3>Сума замовлення</h3>
+{#                <h4>{{ total_price_of_basket }} ₴</h4>#}
+                <h4 id="total_order_amount"> ₴</h4>
+                <div >
+                    <button type="submit" class="btn-delivery btn-lg" >Доставка</button>
+{#                    <button type="submit" class="btn-delivery btn-lg" formaction="{% url 'checkout_delivery' %}">Доставка</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    {% endif %}
+
+{% endblock %}

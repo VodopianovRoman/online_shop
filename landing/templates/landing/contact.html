@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-left">
+                    КОНТАКТИ
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 map-container">
+            <div class="google-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14966.366787487721!2d35.049364220741886!3d48.46219209027929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe2f9e0a33067%3A0xaabc99b8d8c9eaeb!2sLazar%20Globa%20Park!5e0!3m2!1sru!2sua!4v1677608440713!5m2!1sru!2sua" width="538" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="container-info">
+                <svg class="svg-info" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32">
+                    <path stroke="#FC0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+                    <path stroke="#FC0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M26 13c0 9-10 16-10 16S6 22 6 13a10 10 0 1 1 20 0v0Z"></path>
+                </svg>
+                <span class="contact-address">
+                    <span>проспект Дмитра Яворницького, 95</span>
+                </span>
+                <span class="contact-img-wrapper">
+                    <img class="contact-img" src="{% static "img/address_img.jpg" %}" alt="img-address">
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock content %}

@@ -36,3 +36,11 @@ class ProductInOrderAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductInOrder._meta.fields]
     list_display_links = ('id', 'order', 'product',)
     list_filter = ('id', 'order', 'product',)
+
+
+@admin.register(ProductInBasket)
+class ProductInBasketAdmin(admin.ModelAdmin):
+    empty_value_display = '-empty-'
+    list_display = [field.name for field in ProductInBasket._meta.fields]
+    list_display_links = ('id', 'order', 'product',)
+    list_filter = ('id', 'order', 'product',)

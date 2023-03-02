@@ -17,45 +17,68 @@
             <div class="col-lg-6">
                 {% for image_item in product.productimage_set.all %}
                     <img src="{{ image_item.image.url }}" class="img-responsive" alt="img" >
+                    {% if product.discount %}
+                        <div class="discount-container">
+                             <span>{{ product.discount }}%</span>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <div class="col-lg-6">
                 <h1 class="text-center">
                     {{ product.name }}
                 </h1>
-                <div class="">
-{#                    {{ product.description }}#}
+                <div class="weight-item">
+                    {{ product.weight_item }}
                 </div>
-                <div class="">
-                    <div>
+                <div class="price-for-product">
+                    {% if not product.discount %}
+                        <p class="price">{{ product.price }} ₴</p>
+                    {% else %}
+                        <p class="old-price">{{ product.price }} ₴</p>
+                        <p class="price">{{ product.discount_price }} ₴</p>
+                    {% endif %}
+                </div>
 
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                          <li role="presentation" class="active">
-                              <a href="#compound" aria-controls="compound" role="tab" data-toggle="tab">Склад</a>
-                          </li>
-                          <li role="presentation">
-                              <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Відгуки</a>
-                          </li>
-                          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                        </ul>
+                <div class="tabs-menu">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#compound" aria-controls="compound" role="tab" data-toggle="tab">Склад</a>
 
-                        <!-- Tab panes -->
-                        <div class="tab-content product-tab">
-                          <div role="tabpanel" class="tab-pane active" id="compound">{{ product.description }}</div>
-                          <div role="tabpanel" class="tab-pane" id="reviews">
-
-                              {% include 'products/revirew.html' %}
-
-                          </div>
-                          <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                          <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                        </li>
+                        <li role="presentation">
+                            <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Відгуки</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content product-tab">
+                        <div role="tabpanel" class="tab-pane active" id="compound">{{ product.description }}
+                            <div class="to-cart">
+                                <form id="form_buying_product" class="form-inline form_buying_product" action="{% url 'basket_adding' %}">
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="number" class="form-control" name="quantity" id="quantity" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="submit_btn btn" id="submit_btn"
+                                            data-product_id = "{{ product.id }}"
+                                            data-product_name = "{{ product.name }}"
+                                            data-product_price = "{{ product.price }}">
+                                            В кошик
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-
+                        <div role="tabpanel" class="tab-pane" id="reviews">
+                            {% include 'products/revirew.html' %}
+                        </div>
                     </div>
-
                 </div>
+
+
             </div>
         </div>
     </div>

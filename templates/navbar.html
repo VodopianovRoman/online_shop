@@ -1,5 +1,13 @@
 <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-top">
+
+</nav>
+
+<form id="csrf_getting_form">
+    {% csrf_token %}
+</form>
+
+    <nav class="navbar navbar-default navbar-static-top navbar-main" id="navbar">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -8,31 +16,44 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">DeliciousFood</a>
+          <a class="navbar-brand" href="/" style="margin-top: -15px; color: #fc0;"><h2>DeliciousFood</h2></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Домой</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+          <ul class="nav navbar-nav " style="margin-top: 13px;">
+            <li><a href="{% url 'our-products' %}?sety">Сети</a></li>
+            <li><a href="{% url 'our-products' %}?pizza">Піцца</a></li>
+            <li><a href="{% url 'contact' %}">Де нас знайти</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+              <li>
+                  <div class="basket-container">
+                        <a class="empty mini-cart" href="{% url 'checkout' %}" style="text-decoration: none">
+                            <div class="icon-basket"></div>
+                            <div class="total-number">
+                                <span id="basket_total_number" style="font-weight: normal">
+                                    {% if products_total_number %}
+                                        ({{ products_total_number }})
+                                    {% else %}
+                                        (0)
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </a>
+                        <div class="basket-items hidden">
+                            <ul class="items-in-basket-ul">
+                                {# {{ products_in_basket }} get from order\context_processors.py #}
+                                {%  for product_in_basket in products_in_basket %}
+                                    <li class="">{{ product_in_basket.product.name }}| {{ product_in_basket.count }} шт|
+                                        {{ product_in_basket.total_price }}₴| <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">X</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                  </div>
+
+              </li>
           </ul>
+
+
         </div><!--/.nav-collapse -->
       </div>
     </nav>

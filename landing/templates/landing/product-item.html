@@ -1,3 +1,4 @@
+
 <div class="col-lg-3">
     <div class="product-item">
         <div>
@@ -12,13 +13,33 @@
         {% endif %}
         <h3>{{ product_image.product.name }}</h3>
         <p>{{ product_image.product.description|truncatechars_html:75 }}</p>
+{#        <p>{{ product_image.product.id }} {{ product_image.product.name }} {{ product_image.product.price }}</p>#}
         <div class="product-price">
-            <p class="price">{{ product_image.product.price }} ₴</p>
+            {% if not product_image.product.discount %}
+                <p class="price">{{ product_image.product.price }} ₴</p>
+            {% else %}
+                <p class="old-price">{{ product_image.product.price }} ₴</p>
+                <p class="price">{{ product_image.product.discount_price }} ₴</p>
+            {% endif %}
         </div>
+
         <div class="add-to-cart-button">
-            <button class="btn">
-                В кошик
-            </button>
+            <form id="form_buying_product" class="form-inline form_buying_product" action="{% url 'basket_adding' %}">
+                <div class="form-group">
+                    <label>
+                        <input type="number" class="form-control hidden" name="quantity" id="quantity" value="1">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit_btn btn" id="submit_btn"
+                            data-product_id="{{ product_image.product.id }}"
+                            data-product_name="{{ product_image.product.name }}"
+                            data-product_price="{{ product_image.product.price }}">
+                        В кошик
+                    </button>
+                </div>
+            </form>
         </div>
+
     </div>
 </div>

@@ -6,6 +6,7 @@ from products.models import *
 # Create your views here.
 LANDING_HTML = "landing/landing.html"
 HOME_HTML = "landing/home.html"
+CONTACT_HTML = "landing/contact.html"
 
 
 def home(request):
@@ -14,7 +15,16 @@ def home(request):
     products_images_pizza = products_images.filter(product__category__id=1)
     products_images_sets = products_images.filter(product__category__id=2)
 
+    session_key = request.session.session_key
+    if not session_key:
+        request.session.cycle_key()
+
     return render(request, HOME_HTML, locals())
+
+
+def contact(request):
+
+    return render(request, CONTACT_HTML, locals())
 
 
 def landing(request):
