@@ -23,6 +23,16 @@ a {
     text-decoration: none
 }
 
+a.text:active, /* активная/посещенная ссылка */
+a.text:hover,  /* при наведении */
+a.text {
+  text-decoration: none;
+}
+
+.company-name {
+    margin-top: -10px;
+}
+
 #basket_total_number :hover{
     color: black;
 }
